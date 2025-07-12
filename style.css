@@ -759,7 +759,7 @@ p {
 }
 
 .language-switcher a {
-    color: #4c1616; /* linkler için mavi ton */
+    color: var(--dark-color); /* linkler için mavi ton */
     text-decoration: none;
     transition: color 0.3s;
 }
@@ -770,7 +770,7 @@ p {
 }
 
 .language-switcher .active {
-    color: var(--accent-color); /* aktif dil: altın sarısı */
+    color: rgb(52, 8, 8); /* aktif dil: altın sarısı */
     text-decoration: underline;
     cursor: default;
     pointer-events: none;
