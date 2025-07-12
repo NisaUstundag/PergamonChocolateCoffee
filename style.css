@@ -272,8 +272,8 @@ p {
     justify-content: center;
     align-items: center;
     /* Video boyutlarını küçülttük */
-    min-height: 400px; /* Video alanının minimum yüksekliği */
-    max-height: 500px; /* Maksimum yükseklik sınırı */
+    min-height: 300px; /* Video alanının minimum yüksekliği */
+    max-height: 400px; /* Maksimum yükseklik sınırı */
     position: relative;
     border-radius: 8px;
     overflow: hidden;
@@ -289,10 +289,11 @@ p {
 }
 
 .info-text-area {
-    color: var(--text-color-dark);
+    color: var(--secondary-color);
     text-align: left;
     padding: 20px 0;
 }
+
 
 .info-text-area h3 {
     font-size: 2.5em;
@@ -303,7 +304,7 @@ p {
 .info-text-area p {
     font-size: 1.15em;
     margin-bottom: 30px;
-    color: var(--text-color-dark);
+    color: var(--secondary-color);
 }
 
 .info-button {
@@ -350,7 +351,7 @@ p {
     color: var(--dark-color);
 }
 
-.instagram-promo-area .info-text-area p {
+.instagram-promo-area  p {
     color: var(--dark-color);
 }
 
