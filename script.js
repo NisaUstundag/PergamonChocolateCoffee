@@ -62,3 +62,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // .stores-button, .cta-button, .info-button, .load-more-button, .newsletter button stillerine
     // transform: translateY(-Xpx) ve background-color geçişleri eklenmiştir.
 });
+

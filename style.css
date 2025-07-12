@@ -289,7 +289,7 @@ p {
 }
 
 .info-text-area {
-    color: var(--secondary-color);
+    color: var(--light-color);
     text-align: left;
     padding: 20px 0;
 }
@@ -746,4 +746,32 @@ p {
     .info-content-area {
         min-height: 300px;
     }
+}
+
+/* Dil değiştirme kısmı */
+.language-switcher {
+    margin-left: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.language-switcher a {
+    color: #4c1616; /* linkler için mavi ton */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.language-switcher a:hover {
+    color: #ffffff; /* hover olduğunda beyaz olur */
+    text-decoration: underline;
+}
+
+.language-switcher .active {
+    color: var(--accent-color); /* aktif dil: altın sarısı */
+    text-decoration: underline;
+    cursor: default;
+    pointer-events: none;
 }

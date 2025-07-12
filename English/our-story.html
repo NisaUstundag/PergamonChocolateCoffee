@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../hikayemiz.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <img src="../images/logo-vertical-light.png" alt="Logo">
+                </a>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="story.html">Our Story</a></li>
+                    <li><a href="index.html#contact-map-section">Contact</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                </ul>
+                <div class="language-switcher" style="margin-left: 20px; font-weight: bold;">
+        <a href="index.html" class="lang-link active">Türkçe</a> | <a href="English/index.html" class="lang-link">English</a>
+      </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hakkimizda" class="section-light">
+            <h1>Our Story ✨</h1>
+            <div class="content">
+                <div class="image-container">
+                    <a id="hakkimizda-link" href="https://link1.com" target="_blank">
+                        <img
+                            id="hakkimizda-img"
+                            class="hakkimizda-img"
+                            src="https://lh3.googleusercontent.com/p/AF1QipOr49geafMOJr-yOpXA1mVGgGsGSTAXLvo4YWQV=s1360-w1360-h1020-rw"
+                            alt="Pergamon Image">
+                    </a>
+                </div>
+                <div class="text">
+                    <p>Sometimes the aroma of coffee is enough to make you forget the rush of the day. We brought Pergamon to life in Malatya in 2023, with the dream of bringing this feeling to you.</p>
+                    <p>Named after the ancient city of Pergamon, our café brings together the finest forms of coffee and chocolate, offering small moments of happiness with our carefully crafted desserts.</p>
+                    <p>Pergamon is not just a coffee break; it is a small haven where you can take a breath and share warm conversations with your friends.</p>
+                    <p>Our brand offers unique products crafted with quality ingredients and meticulous production processes. With a wide range of flavors that appeal to every taste, we are rapidly progressing towards becoming a globally recognized brand.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Pergamon Chocolate & Coffee. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const slides = [
+            {
+                img: "https://lh3.googleusercontent.com/p/AF1QipOr49geafMOJr-yOpXA1mVGgGsGSTAXLvo4YWQV=s1360-w1360-h1020-rw",
+                link: "https://link1.com"
+            },
+            {
+                img: "https://lh3.googleusercontent.com/p/AF1QipO-GVPAa0S7kb38NUYcTzrM1OJ4vP2SSzbZPPw4=s1360-w1360-h1020-rw",
+                link: "https://link2.com"
+            },
+            {
+                img: "https://lh3.googleusercontent.com/gps-cs-s/AC9h4nqgouHk9ubgRwCbrU-K6Po_Y5P6v8gte7_w6EYxCzDm8fhYAfK7XtZhmPiXQeDpZR6WlYbT0gUl6_U_fk0GyoAcTi8aApJ8URCxWk962tPRxUjodyD3ZBJflz56f93jmilNjwlp0Q=s1360-w1360-h1020-rw",
+                link: "https://link3.com"
+            }
+        ];
+
+        let currentIndex = 0;
+        const imgEl = document.getElementById("hakkimizda-img");
+        const linkEl = document.getElementById("hakkimizda-link");
+
+        setInterval(() => {
+            imgEl.style.opacity = 0;
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                imgEl.src = slides[currentIndex].img;
+                linkEl.href = slides[currentIndex].link;
+                imgEl.style.opacity = 1;
+            }, 500);
+        }, 4000);
+    </script>
+</body>
+</html>
