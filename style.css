@@ -1,0 +1,748 @@
+/* Genel Stil Ayarları - Renkler Korundu, Tonlar Hafifletildi, Fontlar Düzenlendi */
+:root {
+    --primary-color: #dedab3;   /* Belirtilen ana rengin hafifletilmiş hali */
+    --secondary-color: #a7a26a; /* Ana rengin biraz daha koyu, yumuşak tonu */
+    --light-color: #f8f6f0;     /* Arka planlar için çok açık krem */
+    --dark-color: #5c5844;      /* Başlıklar ve önemli metinler için yumuşak koyu kahverengi */
+    --text-color-light: #fff;   /* Açık renk zeminler için beyaz metin */
+    --text-color-dark: #666;    /* Koyu renk zeminler için açık gri metin (hafifletildi) */
+    --accent-color: #c98992;    /* Vurgu rengi (hafifletilmiş kırmızımsı kahve) */
+    --border-color-light: #e8e4d6; /* Daha açık, krem tonlu kenarlıklar */
+    --section-bg-dark: #5c5844; /* Koyu bölüm arka planı için yumuşak kahve */
+    --section-bg-light: #fcfaf5; /* Açık bölüm arka planı için çok açık krem */
+    /* RGB değerleri, rgba() fonksiyonunda kullanılabilmeleri için */
+    --primary-color-rgb: 222, 218, 179;
+    --secondary-color-rgb: 167, 162, 106;
+    --light-color-rgb: 248, 246, 240;
+    --dark-color-rgb: 92, 88, 68;
+    --accent-color-rgb: 201, 137, 146;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--light-color);
+    color: var(--text-color-dark);
+    line-height: 1.8;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    color: var(--dark-color);
+    line-height: 1.2;
+    margin-top: 0;
+}
+
+p {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+}
+
+/* Header */
+.main-header {
+    background-color: var(--primary-color);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Hafifletilmiş gölge */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Scroll için geçiş */
+}
+
+/* Header: Sayfa kaydırıldığında eklenicek sınıf */
+.main-header.scrolled {
+    background-color: rgba(var(--primary-color-rgb), 0.95); /* Hafif opaklık */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Daha belirgin gölge */
+}
+
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.logo img {
+    height: 65px;
+    width: auto;
+}
+
+.main-nav ul {
+    display: flex;
+}
+
+.main-nav li {
+    margin-left: 40px;
+}
+
+.main-nav a {
+    color: var(--dark-color);
+    font-weight: 600;
+    font-size: 1.15em;
+    padding: 10px 0;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.main-nav a:hover {
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.stores-button {
+    background-color: var(--secondary-color);
+    color: var(--text-color-light);
+    border: none;
+    padding: 14px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Hover için animasyon */
+}
+
+.stores-button:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    width:100%;
+    height: 120vh; /* Ekran yüksekliğinin %100'ü kadar büyük */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color-light);
+    text-align: center;
+}
+
+.hero-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.hero-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.hero-image.active {
+    opacity: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    max-width: 900px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+
+    /* Hero Content Animasyon Başlangıç Durumu */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.hero-content.hero-content-animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.hero-content h1 {
+    font-size: 6em;
+    margin-bottom: 25px;
+    color: var(--text-color-light);
+}
+
+.hero-content p {
+    font-size: 2em;
+    margin-bottom: 50px;
+    color: var(--text-color-light);
+    font-weight: 300;
+}
+
+.cta-button {
+    background-color: var(--secondary-color);
+    color: var(--text-color-light);
+    padding: 20px 45px;
+    border-radius: 8px;
+    font-size: 1.3em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Hover için animasyon */
+    display: inline-block;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.cta-button:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-5px);
+}
+
+/* Bilgi Alanları (Video ve Yazı) */
+.info-sections {
+    padding: 80px 0;
+    background-color: var(--section-bg-light);
+}
+
+.info-row {
+    max-width: 1200px;
+    margin: 80px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* Sayfa aşağı kaydırıldığında bölümlerin belirmesi için */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.info-content-area, .info-text-area {
+    flex: 1;
+    min-width: 350px;
+    box-sizing: border-box;
+}
+
+.info-content-area.video-area {
+    background-color: var(--dark-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Video boyutlarını küçülttük */
+    min-height: 400px; /* Video alanının minimum yüksekliği */
+    max-height: 500px; /* Maksimum yükseklik sınırı */
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Video ve Görseli kapsayacak stil */
+.info-content-area video,
+.info-content-area img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Videoları ve görselleri alanı kaplayacak şekilde boyutlandır */
+    display: block;
+}
+
+.info-text-area {
+    color: var(--text-color-dark);
+    text-align: left;
+    padding: 20px 0;
+}
+
+.info-text-area h3 {
+    font-size: 2.5em;
+    margin-bottom: 25px;
+    color: var(--secondary-color);
+}
+
+.info-text-area p {
+    font-size: 1.15em;
+    margin-bottom: 30px;
+    color: var(--text-color-dark);
+}
+
+.info-button {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+    padding: 12px 28px;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease; /* Hover animasyonu */
+    display: inline-block;
+}
+
+.info-button:hover {
+    background-color: var(--secondary-color);
+    color: var(--text-color-light);
+    border-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* İçerik Sıralaması */
+.info-row.align-right-content {
+    flex-direction: row;
+}
+
+.info-row.align-left-content {
+    flex-direction: row-reverse;
+}
+
+/* Instagram Promosyon Alanı */
+.instagram-promo-area {
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+    box-shadow: none;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+.instagram-promo-area .info-text-area {
+    color: var(--dark-color);
+}
+
+.instagram-promo-area .info-text-area h3 {
+    color: var(--dark-color);
+}
+
+.instagram-promo-area .info-text-area p {
+    color: var(--dark-color);
+}
+
+.instagram-promo-area .info-button {
+    background-color: var(--dark-color);
+    color: var(--primary-color);
+    border-color: var(--dark-color);
+}
+
+.instagram-promo-area .info-button:hover {
+    background-color: var(--secondary-color);
+    color: var(--text-color-light);
+    border-color: var(--secondary-color);
+}
+
+/* Tatlı Galerisi Bölümü */
+.sweet-gallery-section {
+    background-color: var(--section-bg-dark);
+    padding: 80px 20px;
+    text-align: center;
+    color: var(--text-color-light);
+}
+
+.gallery-header h2 {
+    font-size: 3.5em;
+    color: var(--primary-color);
+    margin-bottom: 50px;
+}
+
+.sweet-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    transition: transform 0.3s ease; /* Resmin hover'da büyümesi */
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05); /* Hover'da hafif büyüme */
+}
+
+.item-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(var(--dark-color-rgb), 0.9); /* RGB değişkeni kullanıldı */
+    color: var(--text-color-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.gallery-item:hover .item-overlay {
+    opacity: 1;
+}
+
+.item-overlay h3 {
+    margin-top: 0;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.item-overlay p {
+    font-size: 1em;
+    line-height: 1.4;
+    margin-bottom: 0;
+    color: var(--text-color-light);
+}
+
+.load-more-button {
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 50px;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Hover için animasyon */
+}
+
+.load-more-button:hover {
+    background-color: var(--accent-color);
+    color: var(--text-color-light);
+    transform: translateY(-3px);
+}
+
+/* İletişim ve Harita Bölümü */
+.contact-map-section {
+    background-color: var(--secondary-color);
+    color: var(--text-color-light);
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.contact-map-section h2 {
+    font-size: 3.5em;
+    margin-bottom: 50px;
+    color: var(--primary-color);
+}
+
+.map-container {
+    max-width: 1000px;
+    margin: 0 auto 30px auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 450px;
+    border: 0;
+}
+
+.contact-info {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.contact-info h3 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.contact-info p {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.contact-info a {
+    color: var(--light-color);
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: var(--primary-color);
+}
+
+/* Footer */
+.main-footer {
+    background-color: var(--section-bg-dark);
+    color: var(--text-color-light);
+    padding: 50px 20px;
+    font-size: 0.95em;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 30px;
+    padding-right: 20px;
+}
+
+.footer-section h3 {
+    font-size: 1.4em;
+    margin-bottom: 18px;
+    color: var(--primary-color);
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section li {
+    margin-bottom: 10px;
+}
+
+.footer-section a {
+    color: var(--text-color-light);
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: var(--primary-color);
+}
+
+.newsletter input {
+    width: calc(100% - 110px);
+    padding: 12px;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-color-light);
+    margin-bottom: 10px;
+}
+
+.newsletter input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.newsletter button {
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Hover için animasyon */
+}
+
+.newsletter button:hover {
+    background-color: var(--accent-color);
+    color: var(--text-color-light);
+    transform: translateY(-2px);
+}
+
+.social-icons {
+    margin-top: 20px;
+}
+
+.social-icons a {
+    margin-right: 15px;
+    display: inline-block;
+}
+
+.social-icons img {
+    height: 38px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+    transform: scale(1.15);
+}
+
+.copyright, .credit {
+    font-size: 0.9em;
+    margin-top: 25px;
+    width: 100%;
+    color: var(--border-color-light);
+}
+
+/* Responsive Tasarım */
+@media (max-width: 992px) {
+    .header-content {
+        padding: 0 15px;
+    }
+    .main-nav li {
+        margin-left: 20px;
+    }
+    .info-row {
+        flex-direction: column !important;
+        gap: 30px;
+        padding: 30px;
+    }
+
+    .info-content-area, .info-text-area {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .info-row.align-left-content .info-content-area {
+        order: 1;
+    }
+    .info-row.align-left-content .info-text-area {
+        order: 2;
+    }
+
+    .hero-content h1 {
+        font-size: 3.5em;
+    }
+    .hero-content p {
+        font-size: 1.2em;
+    }
+    .gallery-header h2, .contact-map-section h2, .instagram-promo-area h2 {
+        font-size: 2.8em;
+    }
+    .info-text-area h3 {
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        margin-top: 20px;
+    }
+
+    .main-nav li {
+        margin: 10px 0;
+    }
+
+    .stores-button {
+        margin-top: 20px;
+    }
+
+    .hero-section {
+        height: 600px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.8em;
+    }
+
+    .hero-content p {
+        font-size: 1.1em;
+    }
+
+    .sweet-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-section {
+        margin-bottom: 20px;
+        padding-right: 0;
+    }
+
+    .newsletter input {
+        width: 80%;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-content h1 {
+        font-size: 2.2em;
+    }
+    .hero-content p {
+        font-size: 0.9em;
+    }
+    .cta-button {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+    .gallery-header h2, .contact-map-section h2, .instagram-promo-area h2 {
+        font-size: 2em;
+    }
+    .info-text-area h3 {
+        font-size: 1.8em;
+    }
+    .info-button {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+    .info-content-area {
+        min-height: 300px;
+    }
+}
