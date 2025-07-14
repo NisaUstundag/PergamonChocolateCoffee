@@ -1,0 +1,258 @@
+/* Genel stil ayarları */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f9f6f2;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* NAVBAR */
+.main-header {
+  background-color: #e1dcaf;
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease;
+}
+
+.main-header.scrolled {
+    background-color: rgba(225, 220, 175, 0.95); /* Hafif transparan */
+    backdrop-filter: blur(5px);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  flex-wrap: wrap;
+}
+
+.logo img {
+    height: 65px;
+    width: auto;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.main-nav ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.main-nav a {
+  text-decoration: none;
+  font-size: 18px;
+  color: #4c463b;
+  transition: all 0.3s ease;
+}
+
+.main-nav a:hover {
+  color: #2e1d1b;
+}
+
+.main-nav a.active {
+  color: #2e1d1b;
+  font-weight: bold;
+}
+
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  color: #4c463b;
+  margin-left: 20px;
+}
+
+.language-switcher a {
+  color: #4c463b;
+  text-decoration: none;
+}
+
+.language-switcher a:hover {
+  text-decoration: underline;
+}
+
+.language-switcher .active {
+  font-weight: bold;
+  pointer-events: none;
+}
+
+/* Hero Section */
+.menu-hero {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.menu-hero h1 {
+    font-size: 42px;
+    color: #3c2b1f;
+}
+
+.menu-hero p {
+    font-size: 18px;
+    color: #666;
+}
+
+/* Galeri */
+.menu-gallery {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.menu-item-detail {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+    align-items: flex-start;
+}
+
+.menu-item-detail img {
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item-info {
+    flex: 1;
+}
+
+.menu-item-info h3 {
+    font-size: 26px;
+    color: #3c2b1f;
+    margin-bottom: 10px;
+}
+
+.menu-item-info .price {
+    font-size: 20px;
+    color: #9e7c3c;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.menu-item-info .features {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.menu-item-info .features li {
+    margin-bottom: 8px;
+    font-size: 16px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.menu-item-info .features li::before {
+    content: '•';
+    color: #9e7c3c;
+    font-weight: bold;
+    display: inline-block; 
+    width: 1em;
+    margin-left: -1em;
+    position: absolute;
+    left: 0;
+}
+
+
+.menu-item-info .description {
+    font-size: 15px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Yükleniyor Animasyonu */
+.loader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    color: #888;
+    width: 100%;
+}
+
+.spinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #9e7c3c;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Footer */
+.main-footer {
+  background-color: #e1dcaf;
+  color: #4c463b;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Mobil Uyum */
+@media screen and (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .main-nav {
+    flex-direction: column;
+  }
+  .language-switcher {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+  .menu-item-detail {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+  .menu-item-detail img {
+      width: 100%;
+      max-width: 90%;
+      height: auto;
+      margin-bottom: 20px;
+  }
+  .menu-item-info {
+      text-align: center;
+  }
+  .menu-item-info .features li {
+      text-align: left;
+  }
+}

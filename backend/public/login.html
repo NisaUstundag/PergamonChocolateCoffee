@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Girişi</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-container {
+      background: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      width: 100%;
+      max-width: 360px;
+    }
+    h1 {
+      margin-bottom: 25px;
+      color: #333;
+      font-size: 24px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #555;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #error-message {
+      color: #dc3545;
+      margin-top: 15px;
+      font-weight: bold;
+      min-height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Admin Paneli Girişi</h1>
+    <form id="login-form">
+      <div class="form-group">
+        <label for="username">Kullanıcı Adı</label>
+        <input type="text" id="username" required />
+      </div>
+      <div class="form-group">
+        <label for="password">Şifre</label>
+        <input type="password" id="password" required />
+      </div>
+      <button type="submit">Giriş Yap</button>
+    </form>
+    <div id="error-message"></div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      console.log("DOM yüklendi, JavaScript başlatıldı.");
+
+      const form = document.getElementById("login-form");
+      const errorMessageDiv = document.getElementById("error-message");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault(); // Sayfanın yenilenmesini engelle
+        console.log("Form gönderildi.");
+
+        errorMessageDiv.textContent = "";
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        try {
+          const response = await fetch("http://localhost:5000/api/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password }),
+          });
+
+          const result = await response.json();
+          console.log("Sunucudan cevap:", result);
+
+          if (result.success) {
+            localStorage.setItem("jwtToken", result.token);
+            window.location.href = "/admin.html";
+          } else {
+            errorMessageDiv.textContent =
+              result.message || "Kullanıcı adı veya şifre hatalı.";
+          }
+        } catch (error) {
+          console.error("Giriş hatası:", error);
+          errorMessageDiv.textContent =
+            "Sunucuya bağlanılamadı. Lütfen tekrar deneyin.";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

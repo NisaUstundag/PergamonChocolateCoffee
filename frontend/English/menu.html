@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu | Pergamon Chocolate & Coffee</title>
+    <link rel="stylesheet" href="../menu.css">
+    <link rel="icon" href="../images/logo-vertical-light.png" type="image/png">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <img src="../images/logo-vertical-light.png" alt="Logo" />
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html" class="active">Menu</a></li>
+                    <li><a href="our-story.html">Our Story</a></li>
+                    <li><a href="#contact-map-section">Contact</a></li>
+                </ul>
+                <div class="language-switcher">
+                    <a href="../menu.html" class="lang-link">Türkçe</a> | 
+                    <a href="menu.html" class="lang-link active">English</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="menu-hero">
+            <h1>Menu</h1>
+            <p>Meet our special desserts prepared with handmade ingredients.</p>
+        </section>
+
+        <!-- Menu items will be dynamically loaded here -->
+        <section id="menu-gallery-container" class="menu-gallery">
+            <div class="loader">
+                <div class="spinner"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>© 2025 Pergamon Chocolate & Coffee</p>
+    </footer>
+
+    <script>
+        // Scroll effect for the header
+        window.addEventListener("scroll", function () {
+            const header = document.querySelector(".main-header");
+            if (window.scrollY > 50) {
+                header.classList.add("scrolled");
+            } else {
+                header.classList.remove("scrolled");
+            }
+        });
+
+        // Dynamically load the menu
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuContainer = document.getElementById('menu-gallery-container');
+            
+            fetch('/api/menu?lang=en')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(menuItems => {
+                    menuContainer.innerHTML = ''; // Clear the loader
+
+                    console.log("Data received from server for English menu:", menuItems); // Log the data to the console
+
+                    if (!menuItems || menuItems.length === 0) {
+                        menuContainer.innerHTML = '<p style="text-align:center; width:100%;">No menu items found.</p>';
+                        return;
+                    }
+
+                    menuItems.forEach(item => {
+                        const featuresHTML = item.features ? item.features.split('\n').map(feature => `<li>${feature.trim()}</li>`).join('') : '';
+
+                        const menuItemHTML = `
+                            <div class="menu-item-detail">
+                                <img src="${item.image_url}" alt="${item.name}">
+                                <div class="menu-item-info">
+                                    <h3>${item.name.toUpperCase()}</h3>
+                                    <p class="price">${parseFloat(item.price).toFixed(2)}₺</p>
+                                    <ul class="features">${featuresHTML}</ul>
+                                    <p class="description">${item.description || ''}</p>
+                                </div>
+                            </div>
+                        `;
+                        menuContainer.innerHTML += menuItemHTML;
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading the menu:', error);
+                    menuContainer.innerHTML = '<p style="text-align:center;">There was a problem loading the menu. Please check the console (F12) for details.</p>';
+                });
+        });
+    </script>
+</body>
+</html>
