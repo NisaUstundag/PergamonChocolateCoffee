@@ -88,9 +88,18 @@ p {
 }
 
 .logo img {
-    height: 65px;
+    height: 50px;
     width: auto;
+    border-radius: 20px; /* Kenarları hafif yuvarlatır */
+
 }
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 
 .main-nav ul {
     display: flex;
@@ -111,6 +120,33 @@ p {
 .main-nav a:hover {
     color: var(--secondary-color);
     border-bottom: 2px solid var(--secondary-color);
+}
+/* Dil değiştirme kısmı */
+.language-switcher {
+    margin-left: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.language-switcher a {
+    color: var(--dark-color); /* linkler için mavi ton */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.language-switcher a:hover {
+    color: #ffffff; /* hover olduğunda beyaz olur */
+    text-decoration: underline;
+}
+
+.language-switcher .active {
+    color: rgb(52, 8, 8); /* aktif dil: altın sarısı */
+    text-decoration: underline;
+    cursor: default;
+    pointer-events: none;
 }
 
 .stores-button {
@@ -165,14 +201,17 @@ p {
 
 .hero-image {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
-    height: 100%;
+    height: auto; 
     object-fit: cover;
     opacity: 0;
     transition: opacity 1.5s ease-in-out;
+    
 }
+
 
 .hero-image.active {
     opacity: 1;
@@ -184,11 +223,6 @@ p {
     padding: 20px;
     max-width: 900px;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
-
-    /* Hero Content Animasyon Başlangıç Durumu */
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 1s ease-out, transform 1s ease-out;
 }
 
 .hero-content.hero-content-animate {
@@ -748,30 +782,94 @@ p {
     }
 }
 
-/* Dil değiştirme kısmı */
-.language-switcher {
-    margin-left: 20px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+/* Sadece 3. info-row (BU KUTULARDA NE VAR??) için kırmızı arkaplan ve Montserrat font */
+.info-sections .info-row:nth-of-type(3) {
+    background-color: #e21f25;
+    padding: 40px 20px;
+    border-radius: 12px;
+}
+
+/* Sadece bu alandaki yazılar için Montserrat font ve beyaz renk */
+.info-sections .info-row:nth-of-type(3),
+.info-sections .info-row:nth-of-type(3) h3,
+.info-sections .info-row:nth-of-type(3) p,
+.info-sections .info-row:nth-of-type(3) a {
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+}
+
+/* Buton tasarımı */
+.info-sections .info-row:nth-of-type(3) .info-button {
+    background-color: #ffffff;
+    color: #e21f25;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-transform: uppercase;
     font-size: 14px;
-}
-
-.language-switcher a {
-    color: var(--dark-color); /* linkler için mavi ton */
+    display: inline-block;
+    transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
     text-decoration: none;
-    transition: color 0.3s;
+    border: 2px solid transparent;
 }
 
-.language-switcher a:hover {
-    color: #ffffff; /* hover olduğunda beyaz olur */
-    text-decoration: underline;
+.info-sections .info-row:nth-of-type(3) .info-button:hover {
+    background-color: #e21f25;
+    color: #ffffff;
+    border: 2px solid #ffffff;
 }
 
-.language-switcher .active {
-    color: rgb(52, 8, 8); /* aktif dil: altın sarısı */
-    text-decoration: underline;
-    cursor: default;
-    pointer-events: none;
+/* Video responsive kalması için */
+.info-sections .info-row:nth-of-type(3) .video-area video {
+    max-width: 100%;
+    border-radius: 12px;
+    display: block;
 }
+/* Hamburger başlangıçta gizli */
+.hamburger {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: #5c5844; /* hamburger ikonu rengi */
+    user-select: none;
+}
+
+/* Mobil görünümde hamburger göster, nav gizle */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .main-nav {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        background-color: #dedab3; /* ARKA PLAN RENGİ GÜNCELLENDİ */
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 10px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .main-nav ul li a {
+        color: #5c5844; /* link rengi */
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    .main-nav.show {
+        display: flex;
+    }
+
+    .language-switcher {
+        margin-top: 10px;
+    }
+}
+

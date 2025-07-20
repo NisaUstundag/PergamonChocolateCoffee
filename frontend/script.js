@@ -63,3 +63,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // transform: translateY(-Xpx) ve background-color geçişleri eklenmiştir.
 });
 
+const hamburger = document.getElementById('hamburger');
+const mainNav = document.querySelector('.main-nav');
+
+hamburger.addEventListener('click', () => {
+    mainNav.classList.toggle('show');
+});
+// script.js
+
+// Sayfanın hangi klasörde olduğuna göre path ayarlayalım
+const basePath = window.location.pathname.includes("/English/") ? "../images/" : "images/";
+
+const images = [
+  basePath + "hikaye1.jpg",
+  basePath + "hikaye2.jpg",
+  basePath + "hikaye3.jpg"
+];
+
+let currentIndex = 0;
+
+function rotateImage() {
+  const imgElement = document.getElementById("hakkimizda-img");
+  if (imgElement) {
+    imgElement.src = images[currentIndex];
+    currentIndex = (currentIndex + 1) % images.length;
+  }
+}
+
+setInterval(rotateImage, 1500); 

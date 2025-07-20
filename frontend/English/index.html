@@ -4,154 +4,164 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pergamon Chocolate & Coffee</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="images/logo-vertical-light.png" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
-    <link rel="icon" href="images/logo-vertical-light.png" type="image/png">
+    <link rel="icon" href="../images/Logo1.jpg" type="image/jpg">
 </head>
 <body>
     <header class="main-header">
-        <div class="header-content" style="display: flex; align-items: center; justify-content: space-between;">
-            <a href="index.html" class="logo">
-                <img src="../images/logo-vertical-light.png" alt="Logo" />
-            </a>
-            <nav class="main-nav" style="display: flex; align-items: center;">
-                <ul style="display: flex; gap: 20px; margin: 0; padding: 0; list-style: none;">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="menu.html">Menu</a></li>
-                    <li><a href="our-story.html">Our Story</a></li>
-                    <li><a href="#contact-map-section">Contact</a></li>
-                </ul>
-                <div class="language-switcher" style="margin-left: 20px; font-weight: bold;">
-                    <a href="../index.html" class="lang-link">Türkçe</a> | <a href="index.html" class="lang-link active">English</a>
-                </div>
-            </nav>
+  <div class="header-content" style="display: flex; align-items: center; justify-content: space-between;">
+    <a href="index.html" class="logo">
+      <img src="../images/Logo1.jpg" alt="Logo" />
+    </a>
+    <div class="hamburger" id="hamburger">
+    ☰
+</div>
+    <nav class="main-nav" style="display: flex; align-items: center;">
+      <ul style="display: flex; gap: 20px; margin: 0; padding: 0; list-style: none;">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="our-story.html">Our Story</a></li>
+        <li><a href="index.html#contact-map-section">Contact</a></li>
+      </ul>
+      <div class="language-switcher" >
+        <a href="../index.html" class="lang-link">Turkish</a> | <a href="English/index.html" class="lang-link active">English</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+    <section class="hero-section">
+        <div class="hero-image-overlay"></div>
+        <div class="hero-image-wrapper">
+            <img src="../images/Giriş.jpg" alt="Pergamon Opening Visual 1" class="hero-image active">
         </div>
-    </header>
+        <div class="hero-content">
+            <h1>Pergamon Chocolate & Coffee</h1>
+            <p>Discover our unique chocolates and specialty coffees.</p>
+        </div>
+    </section>
+ <section class="sweet-gallery-section">
+        <div class="gallery-header">
+            <h2>Our Special Flavors</h2>
+        </div>
+        <div class="sweet-gallery">
+            <div class="gallery-item">
+                <img src="../images/anasayfa1.jpg" alt="Dessert 1">
+                <div class="item-overlay">
+                    <h3>Moneta</h3>
+                    <p> With our special cream and chocolate pieces...</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="../images/anasayfa2.jpg" alt="Dessert 2">
+                <div class="item-overlay">
+                    <h3>Medusa</h3>
+                    <p> The perfect harmony of pistachio and caramel...</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="../images/anasayfa3.jpg" alt="Dessert 3">
+                <div class="item-overlay">
+                    <h3>Hera</h3>
+                    <p>Fruity and light, a summer favorite...</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="../images/anasayfa4.jpg" alt="Dessert 4">
+                <div class="item-overlay">
+                    <h3>Diana</h3>
+                    <p> Intense flavor for dark chocolate lovers...</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="../images/5tatlı.jpg" alt="Dessert 5">
+                <div class="item-overlay">
+                    <h3>Rhea</h3>
+                    <p> Unmissable for those who love classic tastes...</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="../images/anasayfa6.jpg" alt="Dessert 6">
+                <div class="item-overlay">
+                    <h3>Lotus Cheesecake</h3>
+                    <p>Fruity and light, a summer favorite...</p>
+                </div>
+            </div>
+        </div>
+         <br> </br>
+       <a href="menu.html" class="load-more-button">Load More Flavors</a>
+    </section>
 
-    <main>
-        <section class="hero-section">
-            <div class="hero-image-overlay"></div>
-            <div class="hero-image-wrapper">
-                <img src="../images/HomePageİMG1.png" alt="Pergamon Opening Visual 1" class="hero-image active">
-                <img src="../images/HomePageİMG2.png" alt="Pergamon Opening Visual 2" class="hero-image">
+    <section class="info-sections">
+        <div class="info-row align-right-content">
+            <div class="info-content-area video-area">
+                <video autoplay loop muted playsinline preload="auto">
+                    <source src="../videos/anasayfa-video1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
-            <div class="hero-content">
-                <h1>Pergamon Chocolate & Coffee</h1>
-                <p>Discover our unique chocolates and specialty coffees.</p>
-                <a href="menu.html" class="cta-button">Explore Our Menu</a>
+            <div class="info-text-area">
+                <h3>Masters of Taste</h3>
+                <p>Each chocolate and coffee bean comes to life through the meticulous selection of our masters. In our kitchen where art meets science, we discover the secrets of flavor.</p>
+                <a href="hikayemiz.html" class="info-button">Discover Our Story</a>
             </div>
-        </section>
+        </div>
 
-        <section class="sweet-gallery-section">
-            <div class="gallery-header">
-                <h2>Our Special Flavors</h2>
+        <div class="info-row instagram-promo-area">
+            <div class="info-content-area video-area">
+                <video autoplay loop muted playsinline preload="auto">
+                    <source src="../videos/3.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                </div>
+            <div class="info-text-area">
+                <h3>Follow Us on Instagram!</h3>
+                <p>Don't miss our newest flavors, special events, and daily inspiring moments. Join the Pergamon family!</p>
+                <a href="https://www.instagram.com/pergamonchocolate/" target="_blank" rel="noopener noreferrer" class="info-button">@pergamoncafe</a>
             </div>
-            <div class="sweet-gallery">
-                <div class="gallery-item">
-                    <img src="../images/anasayfa1.jpg" alt="Dessert 1">
-                    <div class="item-overlay">
-                        <h3>Moneta</h3>
-                        <p>Our special cream with chocolate chips...</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../images/anasayfa2.jpg" alt="Dessert 2">
-                    <div class="item-overlay">
-                        <h3>Flavor 2</h3>
-                        <p>The perfect harmony of pistachio and caramel...</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../images/anasayfa3.jpg" alt="Dessert 3">
-                    <div class="item-overlay">
-                        <h3>Flavor 3</h3>
-                        <p>Fruity and light, a summer favorite...</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../images/anasayfa4.jpg" alt="Dessert 4">
-                    <div class="item-overlay">
-                        <h3>Flavor 4</h3>
-                        <p>Intense flavor for dark chocolate lovers...</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../images/anasayfa5.jpg" alt="Dessert 5">
-                    <div class="item-overlay">
-                        <h3>Flavor 5</h3>
-                        <p>Essential for classic flavor enthusiasts...</p>
-                    </div>
-                </div>
+        </div>
+        
+        <div class="info-row align-right-content">
+            <div class="info-content-area video-area">
+                <video autoplay loop muted playsinline preload="auto">
+                    <source src="../videos/anasayfa-video5.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
-            <button class="load-more-button">Load More Flavors</button>
-        </section>
+            <div class="info-text-area">
+                <h3>WHAT'S IN THESE BOXES??</h3>
+                <p>Pergamon Spoon flavor boxes are coming soon.</p>
+                <a href="#" class="info-button"> Pergamon Spoon</a>
+            </div>
+        </div>
 
-        <section class="info-sections">
-            <div class="info-row align-right-content">
-                <div class="info-content-area video-area">
-                    <video autoplay loop muted playsinline preload="auto">
-                        <source src="../videos/anasayfa-video1.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="info-text-area">
-                    <h3>Masters of Flavor</h3>
-                    <p>Every chocolate and coffee bean comes to life through the meticulous selection of our masters. In our kitchen where art meets science, we discover the secrets of flavor.</p>
-                    <a href="our-story.html" class="info-button">Discover Our Story</a>
-                </div>
-            </div>
+    </section>
 
-            <div class="info-row instagram-promo-area">
-                <div class="info-content-area video-area">
-                    <video autoplay loop muted playsinline preload="auto">
-                        <source src="../videos/3.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="info-text-area">
-                    <h3>Follow Us on Instagram!</h3>
-                    <p>Don't miss our newest flavors, special events, and daily inspiring moments. Join the Pergamon family!</p>
-                    <a href="https://www.instagram.com/pergamonchocolate/" target="_blank" rel="noopener noreferrer" class="info-button">@pergamoncafe</a>
-                </div>
-            </div>
+    <section id="contact-map-section" class="contact-map-section">
+        <h2>Contact Us</h2>
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3129.5564343515575!2d38.27902437572077!3d38.336101371849246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x407631af55d9948b%3A0xa268064d65b25a8e!2sPergamon%20Chocolate%20%26%20Coffee!5e0!3m2!1str!2str!4v1752303656228!5m2!1str!2str" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="contact-info">
+            <h3>Contact Information</h3>
+            <p>Özalper, Yenibahar Cd No:157 D:A, 44180 Yeşilyurt/Malatya</p>
+            <p>Phone: 0501 070 58 72</p>
+            <p>Email: <a href="mailto:info@pergamoncafe.com">info@pergamoncafe.com</a></p>
+        </div>
+    </section>
+</main>
 
-            <div class="info-row align-right-content">
-                <div class="info-content-area video-area">
-                    <video autoplay loop muted playsinline preload="auto">
-                        <source src="../videos/video4deneme.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="info-text-area">
-                    <h3>Discover Our New Products</h3>
-                    <p>Experience the latest, mouth-watering flavors from our ever-renewing menu. New surprises await you every season!</p>
-                    <a href="#" class="info-button">Pergamon Spoon</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact-map-section" class="contact-map-section">
-            <h2>Contact Us</h2>
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3129.5564343515575!2d38.27902437572077!3d38.336101371849246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x407631af55d9948b%3A0xa268064d65b25a8e!2sPergamon%20Chocolate%20%26%20Coffee!5e0!3m2!1str!2str!4v1752303656228!5m2!1str!2str" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-            <div class="contact-info">
-                <h3>Contact Information</h3>
-                <p>Özalper, Yenibahar Cd No:157 D:A, 44180 Yeşilyurt/Malatya</p>
-                <p>Phone: 0501 070 58 72</p>
-                <p>Email: <a href="mailto:info@pergamoncafe.com">info@pergamoncafe.com</a></p>
-            </div>
-        </section>
-    </main>
-
-    <footer class="main-footer">
-        <div class="footer-content">
+<footer class="main-footer">
+    <div class="footer-content">
             <p class="copyright">©2025 Pergamon Chocolate & Coffee All Rights Reserved</p>
         </div>
-    </footer>
+    </div>
+</footer>
 
-    <script src="../script.js"></script>
+<script src="../script.js"></script>
 </body>
 </html>

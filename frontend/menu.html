@@ -4,69 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menü | Pergamon Chocolate & Coffee</title>
+    <link rel="icon" href="images/Logo1.jpg" type="image/jpg">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="menu.css">
 </head>
 <body>
-    <header class="main-header">
-        <div class="header-content">
-            <a href="index.html" class="logo"><img src="images/logo-vertical-light.png" alt="Logo" /></a>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="index.html">Ana Sayfa</a></li>
-                    <li><a href="menu.html" class="active">Menü</a></li>
-                    <li><a href="hikayemiz.html">Hikayemiz</a></li>
-                    <li><a href="#contact-map-section">İletişim</a></li>
-                </ul>
-                <div class="language-switcher">
-                    <a href="menu.html" class="lang-link active">Türkçe</a> | 
-                    <a href="English/menu.html" class="lang-link">English</a>
-                </div>
-            </nav>
-        </div>
-    </header>
+<header class="main-header">
+    <div class="header-content">
+        <a href="index.html" class="logo">
+            <img src="images/Logo1.jpg" alt="Logo" />
+        </a>
+        <div class="hamburger" id="hamburger">
+    ☰
+</div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="menu.html" class="active">Menü</a></li>
+                <li><a href="hikayemiz.html">Hikayemiz</a></li>
+                <li><a href="index.html#contact-map-section">İletişim</a></li>
+            </ul>
+            <div class="language-switcher">
+                <a href="menu.html" class="lang-link active">Türkçe</a> |
+                <a href="English/menu.html" class="lang-link">English</a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+
     <main>
         <section class="menu-hero">
             <h1>Menü</h1>
             <p>El yapımı malzemeler ile hazırlanan özel tatlılarımızla tanışın.</p>
         </section>
+
         <section id="menu-gallery-container" class="menu-gallery">
             <div class="loader"><div class="spinner"></div></div>
         </section>
     </main>
+
     <footer class="main-footer"><p>© 2025 Pergamon Chocolate & Coffee</p></footer>
+
     <script>
         window.addEventListener("scroll", () => {
             document.querySelector(".main-header").classList.toggle("scrolled", window.scrollY > 50);
         });
-        document.addEventListener('DOMContentLoaded', () => {
-            const menuContainer = document.getElementById('menu-gallery-container');
-            fetch('/api/menu?lang=tr')
-                .then(response => response.json())
-                .then(menuItems => {
-                    menuContainer.innerHTML = '';
-                    if (menuItems.length === 0) {
-                        menuContainer.innerHTML = '<p style="text-align:center; width:100%;">Gösterilecek menü öğesi bulunamadı.</p>';
-                        return;
-                    }
-                    menuItems.forEach(item => {
-                        const featuresHTML = item.features ? item.features.split('\n').map(f => `<li>${f.trim()}</li>`).join('') : '';
-                        menuContainer.innerHTML += `
-                            <div class="menu-item-detail">
-                                <img src="${item.image_url}" alt="${item.name}">
-                                <div class="menu-item-info">
-                                    <h3>${item.name.toUpperCase()}</h3>
-                                    <p class="price">${parseFloat(item.price).toFixed(2)}₺</p>
-                                    <ul class="features">${featuresHTML}</ul>
-                                    <p class="description">${item.description || ''}</p>
-                                </div>
-                            </div>`;
-                    });
-                })
-                .catch(error => {
-                    console.error('Menü yüklenirken hata:', error);
-                    menuContainer.innerHTML = '<p style="text-align:center;">Menü yüklenirken bir sorun oluştu.</p>';
-                });
-        });
     </script>
+    <script src="script.js"></script>
 </body>
 </html>
