@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Menü | Pergamon Chocolate & Coffee</title>
     <link rel="icon" href="images/Logo1.jpg" type="image/jpg">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="menu.css" />
 </head>
 <body>
 <header class="main-header">
     <div class="header-content">
         <a href="index.html" class="logo">
-            <img src="images/Logo1.jpg" alt="Logo" />
+           <img src="images/Logo1.jpg" alt="Logo" />
         </a>
         <div class="hamburger" id="hamburger">
-    ☰
-</div>
+            ☰
+        </div>
         <nav class="main-nav">
             <ul>
                 <li><a href="index.html">Ana Sayfa</a></li>
@@ -32,25 +32,97 @@
     </div>
 </header>
 
-
-    <main>
-        <section class="menu-hero">
+<main>
+    <section class="menu-hero">
+        <!-- DÜZELTME: Bu div'i ekleyerek JavaScript hatasını gideriyoruz -->
+        <div class="hero-content">
             <h1>Menü</h1>
             <p>El yapımı malzemeler ile hazırlanan özel tatlılarımızla tanışın.</p>
-        </section>
+        </div>
+    </section>
 
-        <section id="menu-gallery-container" class="menu-gallery">
-            <div class="loader"><div class="spinner"></div></div>
-        </section>
-    </main>
+    <!-- Menü öğeleri bu bölüme dinamik olarak yüklenecek -->
+    <section id="menu-gallery-container" class="menu-gallery">
+        <div class="loader"><div class="spinner"></div></div>
+    </section>
+</main>
 
-    <footer class="main-footer"><p>© 2025 Pergamon Chocolate & Coffee</p></footer>
+<footer class="main-footer">
+    <p>© 2025 Pergamon Chocolate & Coffee</p>
+</footer>
 
-    <script>
-        window.addEventListener("scroll", () => {
-            document.querySelector(".main-header").classList.toggle("scrolled", window.scrollY > 50);
-        });
-    </script>
-    <script src="script.js"></script>
+<script>
+    // Sayfa tamamen yüklendiğinde bu kod çalışacak
+     document.addEventListener('DOMContentLoaded', () => {
+
+        // ✅ Hero animasyonu
+        const heroContent = document.querySelector('.hero-content');
+        if (heroContent) {
+            setTimeout(() => {
+                heroContent.classList.add('hero-content-animate');
+            }, 100);
+        }
+
+        // Header'ın scroll efekti için
+        const header = document.querySelector(".main-header");
+        if(header) {
+            window.addEventListener("scroll", () => {
+                header.classList.toggle("scrolled", window.scrollY > 50);
+            });
+        }
+
+        // Hamburger menü için
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.querySelector('.main-nav');
+        if(hamburger && nav) {
+            hamburger.addEventListener('click', () => {
+                nav.classList.toggle('active');
+            });
+        }
+
+        // Menüyü dinamik olarak yüklemek için
+        const menuContainer = document.getElementById('menu-gallery-container');
+        
+        // Backend'den TÜRKÇE menüyü iste
+        fetch('/api/menu?lang=tr')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP hatası! Durum: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(menuItems => {
+                menuContainer.innerHTML = ''; // Yükleniyor animasyonunu temizle
+
+                if (!menuItems || menuItems.length === 0) {
+                    menuContainer.innerHTML = '<p style="text-align:center; width:100%;">Gösterilecek menü öğesi bulunamadı.</p>';
+                    return;
+                }
+
+                menuItems.forEach(item => {
+                    const featuresHTML = item.features ? item.features.split('\n').map(feature => `<li>${feature.trim()}</li>`).join('') : '';
+
+                    const menuItemHTML = `
+                        <div class="menu-item-detail">
+                            <img src="${item.image_url}" alt="${item.name}">
+                            <div class="menu-item-info">
+                                <h3>${item.name.toUpperCase()}</h3>
+                                <p class="price">${parseFloat(item.price).toFixed(2)}₺</p>
+                                <ul class="features">
+                                    ${featuresHTML}
+                                </ul>
+                                <p class="description">${item.description || ''}</p>
+                            </div>
+                        </div>
+                    `;
+                    menuContainer.innerHTML += menuItemHTML;
+                });
+            })
+            .catch(error => {
+                console.error('Menü yüklenirken hata:', error);
+                menuContainer.innerHTML = '<p style="text-align:center;">Menü yüklenirken bir sorun oluştu. Lütfen F12 ile konsolu kontrol edin.</p>';
+            });
+    });
+</script>
 </body>
 </html>

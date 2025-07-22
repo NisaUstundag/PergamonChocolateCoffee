@@ -14,7 +14,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Middleware
+// Temel Middleware'ler
 app.use(cors());
 app.use(
   helmet({
@@ -22,13 +22,14 @@ app.use(
       directives: {
         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
         "script-src": ["'self'", "'unsafe-inline'"],
+        "frame-src": ["'self'", "https://www.google.com/"], // Google Harita için
       },
     },
   })
 );
 app.use(express.json());
 
-// Statik Klasör Yönlendirmesi
+// Statik Klasörler
 app.use(express.static(path.join(__dirname, '../frontend')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -64,11 +65,13 @@ const verifyToken = (req, res, next) => {
 app.post("/api/login", async (req, res) => {
     try {
         const { username, password } = req.body;
-        const [rows] = await pool.query('SELECT * FROM admins WHERE username = ?', [username]);
+        // DÜZELTME: 'admins' yerine 'admin_users' tablosunu sorgula
+        const [rows] = await pool.query('SELECT * FROM admin_users WHERE username = ?', [username]);
         if (rows.length === 0) return res.status(401).json({ success: false, message: 'Kullanıcı adı veya şifre hatalı!' });
         
         const admin = rows[0];
-        const isPasswordMatch = await bcrypt.compare(password, admin.password);
+        // DÜZELTME: 'admin.password' yerine 'admin.password_hash' ile karşılaştır
+        const isPasswordMatch = await bcrypt.compare(password, admin.password_hash);
         if (!isPasswordMatch) return res.status(401).json({ success: false, message: 'Kullanıcı adı veya şifre hatalı!' });
 
         const token = jwt.sign({ id: admin.id }, process.env.JWT_SECRET_KEY || 'gizli', { expiresIn: '8h' });
@@ -82,11 +85,9 @@ app.post("/api/login", async (req, res) => {
 
 // --- MENÜ API ENDPOINT'LERİ ---
 
-// GET (Tümü): Hem admin paneli hem de müşteri menüsü için
+// GET (Tümü, dile göre)
 app.get("/api/menu", async (req, res) => {
-    const lang = req.query.lang; // Dil parametresini al
-    
-    // Eğer dil parametresi varsa, dile özel veri gönder
+    const lang = req.query.lang;
     if (lang === 'tr' || lang === 'en') {
         const nameField = `name_${lang} as name`;
         const descriptionField = `description_${lang} as description`;
@@ -96,21 +97,17 @@ app.get("/api/menu", async (req, res) => {
             const [rows] = await pool.query(sql);
             res.json(rows);
         } catch (err) {
-            console.error("🔴 Menü listeleme hatası:", err);
             res.status(500).json({ error: "Menü alınamadı" });
         }
     } else {
-        // Eğer dil parametresi yoksa (admin paneli için), tüm verileri gönder
         try {
             const [rows] = await pool.query('SELECT * FROM menu_items ORDER BY id DESC');
             res.json(rows);
         } catch (err) {
-            console.error("🔴 Menü listeleme hatası:", err);
             res.status(500).json({ error: "Menü alınamadı" });
         }
     }
 });
-
 
 // GET (Tekil, düzenleme için)
 app.get("/api/menu/:id", async (req, res) => {
@@ -119,7 +116,6 @@ app.get("/api/menu/:id", async (req, res) => {
         if (rows.length === 0) return res.status(404).json({ message: "Öğe bulunamadı." });
         res.json(rows[0]);
     } catch (err) {
-        console.error("🔴 Tekil menü öğesi alma hatası:", err);
         res.status(500).json({ error: "Öğe alınamadı" });
     }
 });
@@ -133,7 +129,6 @@ app.post("/api/menu", verifyToken, upload.single('image_file'), async (req, res)
         await pool.execute(`INSERT INTO menu_items (name_tr, name_en, price, image_url, description_tr, description_en, features_tr, features_en) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, [name_tr, name_en, price, image_url, description_tr, description_en, features_tr, features_en]);
         res.status(201).json({ message: "Menü öğesi eklendi ✅" });
     } catch (err) {
-        console.error("🔴 Menü ekleme hatası:", err);
         res.status(500).json({ error: "Veritabanına eklenirken hata oluştu." });
     }
 });
@@ -151,7 +146,6 @@ app.put("/api/menu/:id", verifyToken, upload.single('image_file'), async (req, r
         if (result.affectedRows === 0) return res.status(404).json({ message: "Güncellenecek öğe bulunamadı." });
         res.status(200).json({ message: "Menü öğesi başarıyla güncellendi." });
     } catch (err) {
-        console.error("🔴 Menü güncelleme hatası:", err);
         res.status(500).json({ error: "Öğe güncellenirken bir hata oluştu." });
     }
 });
@@ -163,10 +157,10 @@ app.delete("/api/menu/:id", verifyToken, async (req, res) => {
         if (result.affectedRows === 0) return res.status(404).json({ message: "Silinecek öğe bulunamadı." });
         res.status(200).json({ message: "Menü öğesi başarıyla silindi." });
     } catch (err) {
-        console.error("🔴 Menü silme hatası:", err);
         res.status(500).json({ error: "Öğe silinirken bir hata oluştu." });
     }
 });
+
 
 // --- SUNUCUYU BAŞLATMA ---
 app.listen(port, () => {

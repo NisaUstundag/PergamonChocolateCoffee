@@ -831,6 +831,7 @@ p {
     font-size: 30px;
     cursor: pointer;
     color: #5c5844; /* hamburger ikonu rengi */
+    -webkit-user-select: none;
     user-select: none;
 }
 

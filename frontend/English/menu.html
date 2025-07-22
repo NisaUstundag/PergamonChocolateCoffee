@@ -7,17 +7,27 @@
     <link rel="icon" href="../images/Logo1.jpg" type="image/jpg">
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../menu.css" />
+    <style>
+        .hero-content-animate {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+        .hero-content {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+    </style>
 </head>
 <body>
 <header class="main-header">
     <div class="header-content">
         <a href="index.html" class="logo">
            <img src="../images/Logo1.jpg" alt="Logo" />
-
         </a>
         <div class="hamburger" id="hamburger">
-    ☰
-</div>
+            ☰
+        </div>
         <nav class="main-nav">
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -26,8 +36,8 @@
                 <li><a href="index.html#contact-map-section">Contact</a></li>
             </ul>
             <div class="language-switcher">
-                <a href="menu.html" class="lang-link active">English</a> |
-                <a href="English/menu.html" class="lang-link">Türkçe</a>
+                <a href="../menu.html" class="lang-link">Türkçe</a> |
+                <a href="menu.html" class="lang-link active">English</a>
             </div>
         </nav>
     </div>
@@ -35,8 +45,11 @@
 
 <main>
     <section class="menu-hero">
-        <h1>Menu</h1>
-        <p>Discover our special desserts made with handmade ingredients.</p>
+        <!-- Hero Content Animasyon için eklendi -->
+        <div class="hero-content">
+            <h1>Menu</h1>
+            <p>Discover our special desserts made with handmade ingredients.</p>
+        </div>
     </section>
 
     <section id="menu-gallery-container" class="menu-gallery">
@@ -49,10 +62,66 @@
 </footer>
 
 <script>
-    window.addEventListener("scroll", () => {
-        document.querySelector(".main-header").classList.toggle("scrolled", window.scrollY > 50);
+    document.addEventListener('DOMContentLoaded', () => {
+        const header = document.querySelector(".main-header");
+        if (header) {
+            window.addEventListener("scroll", () => {
+                header.classList.toggle("scrolled", window.scrollY > 50);
+            });
+        }
+
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.querySelector('.main-nav');
+        if (hamburger && nav) {
+            hamburger.addEventListener('click', () => {
+                nav.classList.toggle('active');
+            });
+        }
+
+        // HERO CONTENT ANİMASYONU
+        const heroContent = document.querySelector('.hero-content');
+        if (heroContent) {
+            setTimeout(() => {
+                heroContent.classList.add('hero-content-animate');
+            }, 100);
+        }
+
+        // Menü verilerini yükle
+        const menuContainer = document.getElementById('menu-gallery-container');
+        fetch('/api/menu?lang=en')
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                return response.json();
+            })
+            .then(menuItems => {
+                menuContainer.innerHTML = '';
+
+                if (!menuItems || menuItems.length === 0) {
+                    menuContainer.innerHTML = '<p style="text-align:center; width:100%;">No menu items found.</p>';
+                    return;
+                }
+
+                menuItems.forEach(item => {
+                    const featuresHTML = item.features ? item.features.split('\n').map(f => `<li>${f.trim()}</li>`).join('') : '';
+                    const menuItemHTML = `
+                        <div class="menu-item-detail">
+                            <img src="${item.image_url}" alt="${item.name}">
+                            <div class="menu-item-info">
+                                <h3>${item.name.toUpperCase()}</h3>
+                                <p class="price">${parseFloat(item.price).toFixed(2)}₺</p>
+                                <ul class="features">${featuresHTML}</ul>
+                                <p class="description">${item.description || ''}</p>
+                            </div>
+                        </div>
+                    `;
+                    menuContainer.innerHTML += menuItemHTML;
+                });
+            })
+            .catch(error => {
+                console.error('Error loading menu:', error);
+                menuContainer.innerHTML = '<p style="text-align:center;">There was a problem loading the menu. Please check the console (F12).</p>';
+            });
     });
 </script>
-<script src="../script.js"></script>
 </body>
 </html>
